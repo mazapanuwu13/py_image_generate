@@ -1,0 +1,85 @@
+{
+    "portada": {
+      "titulo": "¿Qué es HttpOnly?",
+      "categoria": "Seguridad Web",
+      "output": "solid_slide_1_portada.png",
+      "color_texto": "texto"
+    },
+    "slides": [
+      {
+        "titulo": "Definición",
+        "categoria": "HttpOnly",
+        "contenido": [
+          ["Una cookie con atributo ", null],
+          ["HttpOnly", "coral"],
+          [" solo puede ser enviada al servidor y ", null],
+          ["no puede ser accedida por scripts del lado del cliente", "celeste"],
+          [". Esto ayuda a evitar filtraciones de información sensible.", null]
+        ],
+        "color_texto": "texto"
+      },
+      {
+        "titulo": "¿Por qué usarlo?",
+        "categoria": "Ventajas",
+        "contenido": [
+          ["Ayuda a prevenir ataques ", null],
+          ["XSS (Cross-Site Scripting)", "celeste"],
+          [", ya que el JavaScript malicioso no podrá acceder a cookies marcadas como ", null],
+          ["HttpOnly", "coral"],
+          [".", null]
+        ],
+        "color_texto": "texto"
+      },
+      {
+        "titulo": "Cómo se establece",
+        "categoria": "Ejemplo de Cabecera",
+        "contenido": [
+          ["La cookie se configura en la cabecera de respuesta así:", null],
+          ["Set-Cookie: sessionId=abc123; HttpOnly; Secure; Path=/", "chip_text"],
+          ["\n• ", null],
+          ["HttpOnly", "coral"],
+          [": impide el acceso desde JavaScript.\n• ", null],
+          ["Secure", "celeste"],
+          [": solo se transmite por HTTPS.\n• ", null],
+          ["Path=/", "chip_text"],
+          [": define el alcance de la cookie.", null]
+        ],
+        "color_texto": "texto"
+      },
+      {
+        "titulo": "Limitaciones",
+        "categoria": "Consideraciones",
+        "contenido": [
+          ["El atributo ", null],
+          ["HttpOnly", "coral"],
+          [" no protege contra ataques ", null],
+          ["CSRF (Cross-Site Request Forgery)", "celeste"],
+          [". Es importante combinarlo con otras medidas de seguridad.", null]
+        ],
+        "color_texto": "texto"
+      },
+      {
+        "titulo": "Buenas prácticas",
+        "categoria": "Recomendaciones",
+        "contenido": [
+          ["• Usa ", null],
+          ["HttpOnly", "coral"],
+          [", ", null],
+          ["Secure", "celeste"],
+          [" y ", null],
+          ["SameSite", "coral"],
+          [" para reforzar la protección de tus cookies.", null],
+          ["\n• Mantén tu aplicación libre de vulnerabilidades XSS y valida el contenido externo.", null]
+        ],
+        "color_texto": "texto"
+      }
+    ],
+    "cta": {
+      "bloque1": "¿Quieres reforzar la seguridad de tu web?",
+      "bloque2": "Aplica el atributo HttpOnly a tus cookies sensibles",
+      "bloque3": "Visita nuestro blog para más consejos sobre seguridad web",
+      "output": "solid_slide_7_cta.png",
+      "color_texto": "texto"
+    }
+  }
+  

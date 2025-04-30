@@ -5,39 +5,42 @@ from utils.utils import crear_base_con_textura, dibujar_chip, insertar_logo, dib
 
 def wrap_segmented_text(draw, segments, font, highlight_font, max_width):
     """
-    segments es una lista de tuplas (text, color_key),
-    donde color_key puede ser el nombre de una clave en COLORS o None.
+    Convierte una lista de segmentos de texto con posibles colores en líneas ajustadas al ancho máximo.
+    Maneja correctamente los saltos de línea '\n' dentro del texto.
     """
     lines, current_line, current_width = [], [], 0
 
     for text, color_key in segments:
-        if text == "\n":
-            # Cambio de línea forzado
-            lines.append(current_line)
-            current_line, current_width = [], 0
-            continue
-
-        # color_key puede ser algo como "coral", "chip_text", etc.
-        # Si es None, luego se usará el color por defecto en dibujar_texto_contenido
         color = COLORS.get(color_key) if color_key else None
+        fnt = highlight_font if color else font
 
-        for word in text.split(" "):
-            word += " "
-            fnt = highlight_font if color else font
-            width = draw.textlength(word, font=fnt)
+        # Procesar saltos de línea explícitos
+        sublines = text.split("\n")
+        for i, subtext in enumerate(sublines):
+            words = subtext.split(" ")
+            for word in words:
+                word += " "
+                width = draw.textlength(word, font=fnt)
 
-            if current_width + width > max_width:
+                if current_width + width > max_width:
+                    lines.append(current_line)
+                    current_line = [(word, color)]
+                    current_width = width
+                else:
+                    current_line.append((word, color))
+                    current_width += width
+
+            # Si no es la última sublínea, forzamos un salto
+            if i < len(sublines) - 1:
                 lines.append(current_line)
-                current_line = [(word, color)]
-                current_width = width
-            else:
-                current_line.append((word, color))
-                current_width += width
+                current_line = []
+                current_width = 0
 
     if current_line:
         lines.append(current_line)
 
     return lines
+
 
 def dibujar_caja_contenido(base, box):
     """Dibuja una caja semitransparente (overlay) dentro del área 'box'."""
